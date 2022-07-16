@@ -14,10 +14,10 @@ Console HangMan game made in C#. The game consists in guessing the randomly sele
  - mysql
 
 # Tasks
- - Prepare the database
+ - Prepare the database :heavy_check_mark:
  - Create the interface
  - Prepare tests
- - Make a guessing system
+ - Make a guess system
  - Create win-loose conditions
- - Conect the database to the game
+ - Conect the database to the game :heavy_check_mark:
  - Test the game
