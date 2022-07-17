@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace HangMan
 {
-    class Program
+    public class Game
     {
         static void Main(string[] args)
         {
@@ -51,6 +51,11 @@ namespace HangMan
             }
             con.Close();
             return "";
+        }
+
+        public bool checkLetter(string word, char letter)
+        {
+            return word.Contains(letter);
         }
     }
 }
