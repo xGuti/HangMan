@@ -1,61 +1,40 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using MySql.Data.MySqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HangMan
 {
     public class Game
     {
-        static void Main(string[] args)
-        {
-            /* This 2 lines will change database content automatically
-            DBScript dBScript = new DBScript();
-            dBScript.Run();
-            */
-            Console.WriteLine("Wciśnij dowolny klawisz aby rozpocząć.\nESC wby wyjść.");
+        private string word { get; set; }
+        private List<char> availableLetters = new List<char>();
+        private int lives { get; set; }
 
-            string word = drawWord();
+        public Game()
+        {
+            lives = 8;
+            for (int i = 65; i <= 90; i++)
+                availableLetters.Append((char)i);
+            this.word = "hangman";
+        }
+        public Game(string word)
+        {
+            this.lives = 8;
+            for (int i = 65; i <= 90; i++)
+                this.availableLetters.Add((char)i);
+            this.word = word;
         }
 
-        static string drawWord(string connectionString = @"server=localhost;userid=root;database=hangman")
+        public bool CheckLetter(char letter)
         {
-            string word = "";
-            Console.WriteLine("Connecting . . .");
-            MySqlConnection con = new MySqlConnection(connectionString);
-            con.Open();
-            Console.WriteLine("Connected");
-            try
+            if (this.word is null)
             {
-                Console.WriteLine("Shuffling");
-                MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM words ORDER BY rand() LIMIT 1", con);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    word = reader[1].ToString();
-                }
-                reader.Close();
-
-                Console.WriteLine("Word drawed");
-
-                con.Close();
-
-                return word;
+                throw new ArgumentNullException(nameof(this.word));
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-            }
-            con.Close();
-            return "";
-        }
 
-        public bool checkLetter(string word, char letter)
-        {
-            return word.Contains(letter);
+            return this.word.Contains(letter);
         }
     }
 }

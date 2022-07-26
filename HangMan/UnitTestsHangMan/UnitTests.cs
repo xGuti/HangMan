@@ -9,11 +9,11 @@ namespace UnitTestsHangMan
         [TestMethod]
         public void TestCheckLetter()
         {
-            Game instance = new Game();
             string word = "test";
+            Game instance = new Game(word);
             char letter = 'e';
 
-            var result = instance.checkLetter(word, letter);
+            var result = instance.CheckLetter(letter);
 
             Assert.IsTrue(result);
         }
