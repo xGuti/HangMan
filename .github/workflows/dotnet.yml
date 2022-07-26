@@ -12,11 +12,18 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - uses: actions/checkout@master
+    - uses: nuget/setup-nuget@v1
       with:
-        dotnet-version: 5.0.x
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
+        nuget-version: '5.x'
+    - run: nuget restore HangMan.sln
+    
+    #- uses: actions/checkout@v3
+    #- name: Setup .NET
+    #  uses: actions/setup-dotnet@v2
+    #  with:
+    #    dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore ./HangMan/HangMan/HangMan.csproj
     - name: Build
