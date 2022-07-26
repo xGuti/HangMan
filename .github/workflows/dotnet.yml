@@ -17,7 +17,7 @@ jobs:
       with:
         nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
-    - run: nuget restore HangMan.sln
+    - run: nuget restore ./HangMan/HangMan.sln
     
     #- uses: actions/checkout@v3
     #- name: Setup .NET
